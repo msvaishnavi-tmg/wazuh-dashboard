@@ -7,12 +7,15 @@ RUN apt-get update && \
       libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 \
       libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 \
       libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 \
-      libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget && \
-    rm -rf /var/lib/apt/lists/*
+      libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget
 
-RUN sudo add-apt-repository ppa:openjdk-r/ppa && \
-sudo apt-get update && \
-sudo apt-get install openjdk-8-jdk
+RUN apt-get update && \
+apt-get install software-properties-common && \
+apt-add-repository 'deb http://security.debian.org/debian-security stretch/updates main' && \
+apt-get update && \
+apt-get install openjdk-8-jdk
+
+RUN rm -rf /var/lib/apt/lists/*
 # Specify the version of Chrome that matches the version of chromedriver in the package.json.
 # A list of Chrome versions can be found here:
 # https://www.ubuntuupdates.org/package/google_chrome/stable/main/base/google-chrome-stable
