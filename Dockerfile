@@ -10,11 +10,9 @@ RUN apt-get update && \
       libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget && \
     rm -rf /var/lib/apt/lists/*
 
-RUN apt-get update && \
-apt-get install -y software-properties-common && \
-add-apt-repository --yes https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/ && \
-apt-get update && \
-apt-get install -y adoptopenjdk-8-hotspot
+RUN sudo add-apt-repository ppa:openjdk-r/ppa && \
+sudo apt-get update && \
+sudo apt-get install openjdk-8-jdk
 # Specify the version of Chrome that matches the version of chromedriver in the package.json.
 # A list of Chrome versions can be found here:
 # https://www.ubuntuupdates.org/package/google_chrome/stable/main/base/google-chrome-stable
