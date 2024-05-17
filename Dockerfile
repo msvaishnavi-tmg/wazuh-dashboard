@@ -9,9 +9,14 @@ RUN apt-get update && \
       libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 \
       libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget
 
-RUN apt-get update && \
-apt-get install -y --no-install-recommends \
-openjdk-11-jre
+RUN set -ex && \
+echo 'deb http://deb.debian.org/debian jessie-backports main' \
+> /etc/apt/sources.list.d/jessie-backports.list && \
+apt update -y && \
+apt install -t \
+jessie-backports \
+openjdk-8-jre-headless \
+ca-certificates-java -y
 
 RUN rm -rf /var/lib/apt/lists/*
 # Specify the version of Chrome that matches the version of chromedriver in the package.json.
