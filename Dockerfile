@@ -10,10 +10,8 @@ RUN apt-get update && \
       libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget
 
 RUN apt-get update && \
-apt-get install software-properties-common && \
-apt-add-repository 'deb http://security.debian.org/debian-security stretch/updates main' && \
-apt-get update && \
-apt-get install openjdk-8-jdk
+apt-get install -y --no-install-recommends \
+openjdk-11-jre
 
 RUN rm -rf /var/lib/apt/lists/*
 # Specify the version of Chrome that matches the version of chromedriver in the package.json.
