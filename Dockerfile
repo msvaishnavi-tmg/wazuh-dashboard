@@ -13,11 +13,12 @@ RUN apt-get update && \
       libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 \
       libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget
 
-USER root
-RUN echo "deb http://security.debian.org/debian-security stretch/updates main" >> /etc/apt/sources.list                                                   
-RUN mkdir -p /usr/share/man/man1 && \
-  apt-get update -y && \
-  apt-get install -y openjdk-8-jdk
+RUN wget http://security.debian.org/debian-security/pool/updates/main/o/openjdk-8/openjdk-8-jre-headless_8u212-b03-2~deb9u1_amd64.deb \
+&& wget http://security.debian.org/debian-security/pool/updates/main/o/openjdk-8/openjdk-8-jre_8u212-b03-2~deb9u1_amd64.deb \
+&& wget http://security.debian.org/debian-security/pool/updates/main/o/openjdk-8/openjdk-8-jdk-headless_8u212-b03-2~deb9u1_amd64.deb \
+&& wget http://security.debian.org/debian-security/pool/updates/main/o/openjdk-8/openjdk-8-jdk_8u212-b03-2~deb9u1_amd64.deb
+
+RUN dpkg -i --force-all openjdk-8-jre-headless_8u212-b03-2~deb9u1_amd64.deb openjdk-8-jre_8u212-b03-2~deb9u1_amd64.deb openjdk-8-jdk-headless_8u212-b03-2~deb9u1_amd64.deb openjdk-8-jdk_8u212-b03-2~deb9u1_amd64.deb
 
 RUN rm -rf /var/lib/apt/lists/*
 # Specify the version of Chrome that matches the version of chromedriver in the package.json.
